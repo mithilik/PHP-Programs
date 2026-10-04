@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9299SZ9R6T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9299SZ9R6T');
+</script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Learn PHP Programs with Mithili</title>
+<style>
+:root{--bg:#f7f7f4;--card:#fff;--tx:#1d1d1b;--mu:#6b6b66;--ac:#4f5bd5;--ok:#1a7f4b;--bad:#c0392b;--bd:#e2e2dc;--cb:#16181d;--ct:#e6e6e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121316;--card:#1b1c20;--tx:#ececea;--mu:#9a9a94;--ac:#8f99ff;--ok:#4cc38a;--bad:#ff7b6b;--bd:#2d2f35;--cb:#0c0d10}}
+:root[data-theme="dark"]{--bg:#121316;--card:#1b1c20;--tx:#ececea;--mu:#9a9a94;--ac:#8f99ff;--ok:#4cc38a;--bad:#ff7b6b;--bd:#2d2f35;--cb:#0c0d10}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:8px 0 2px}h2{font-size:1.1rem;margin:0 0 8px}
+.sub{color:var(--mu);margin:0 0 14px}
+nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+nav button{white-space:nowrap}
+button{font:inherit;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 13px;border-radius:8px;cursor:pointer}
+button.on,button.pri{background:var(--ac);color:#fff;border-color:var(--ac)}
+button:disabled{opacity:.4;cursor:default}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin:12px 0}
+.num{display:inline-block;background:var(--ac);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;font-size:.8rem;line-height:22px;margin-right:6px}
+ol.logic{margin:0;padding-left:20px}ol.logic li{margin:4px 0}
+pre{background:var(--cb);color:var(--ct);padding:12px;border-radius:8px;overflow-x:auto;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;margin:0}
+.note{font-size:.9rem;color:var(--mu);margin-top:8px}
+input[type=text]{font:inherit;padding:7px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);width:min(240px,100%)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.say{background:var(--bg);border-left:4px solid var(--ac);padding:8px 12px;border-radius:6px;min-height:44px}
+.tw{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;width:100%;font:13px ui-monospace,Menlo,Consolas,monospace}
+th,td{border:1px solid var(--bd);padding:4px 8px;text-align:center}th{background:var(--bg)}
+tr.cur td{background:color-mix(in srgb,var(--ac) 22%,transparent);font-weight:700}
+.out{background:var(--cb);color:#9be39b;padding:10px 12px;border-radius:8px;font:14px ui-monospace,Menlo,Consolas,monospace;min-height:40px;margin-top:8px;word-break:break-word}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+</style></head>
+<body><main>
+<h1>PHP Programs - Learn, Trace, Iterate</h1>
+<p class="sub">Pick a program → read the logic → see the code → step through every iteration → test yourself.</p>
+<nav id="nav"></nav>
+<div id="app"></div>
+</main>
+<script>
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fail=m=>({err:m});
+const P=[
+{id:"prime",name:"1. Prime number",inp:"Enter a number (1–40)",def:"13",
+logic:["A prime number has <b>exactly 2 divisors</b>: 1 and itself.","Set <code>$count = 0</code>. Loop <code>$i</code> from 1 up to <code>$n</code>.","If <code>$n % $i == 0</code> (remainder 0), <code>$i</code> divides <code>$n</code>, so add 1 to <code>$count</code>.","After the loop: <code>$count == 2</code> → prime, otherwise not prime."],
+note:"Edge case: for 1, count is 1, so it is correctly 'not prime'. The form should also check <code>isset($_GET['number'])</code> to avoid a warning on first load.",
+code:`<html>
+<head><title>Find if the given number is prime</title></head>
+<body>
+<form action="" method="GET">
+Enter a number: <input type="text" name="number"><br>
+<input type="submit" name="send" value="submit">
+</form>
+
+<?php
+  $n = $_GET["number"];
+  $count = 0;
+
+  for ($i = 1; $i <= $n; $i++) {
+    if ($n % $i == 0) {
+      $count++;
+    }
+  }
+
+  if ($count == 2) {
+    echo "$n is a Prime Number";
+  }
+  else {
+    echo "$n is not a Prime Number";
+  }
+?>
+</body>
+</html>`,
+run(v){const n=parseInt(v);if(!(n>=1&&n<=40))return fail("Enter a whole number from 1 to 40 (kept small so the trace stays readable).");
+let c=0,s=[{say:`Start: $n = ${n}, $count = 0.`,row:null}];
+for(let i=1;i<=n;i++){const r=n%i;if(r==0)c++;s.push({say:`$i = ${i}: ${n} % ${i} = ${r}. `+(r==0?`Divides exactly, so $count becomes ${c}.`:`Not a divisor, $count stays ${c}.`),row:{"$i":i,"$n % $i":r,"$count":c}})}
+s.push({say:`Loop ended. $count = ${c}. `+(c==2?"It equals 2 → prime.":"It is not 2 → not prime."),row:null});
+return{steps:s,out:`${n} is ${c==2?"":"not "}a Prime Number`}},
+pool:["7","12","13","15","17","21","1","29"],
+quiz:v=>({q:`Is ${v} prime? (yes / no)`,a:parseInt(v)>1&&[...Array(parseInt(v)).keys()].filter(i=>i>0&&v%i==0).length==1?"yes":"no"})},
+
+{id:"fact",name:"2. Factorial",inp:"Enter a number (0–15)",def:"5",
+logic:["n! = 1 × 2 × 3 × … × n. Start with <code>$fact = 1</code> (the neutral value for multiplication).","Loop <code>$i</code> from 1 to <code>$num</code>.","Each pass: <code>$fact = $fact * $i</code>, so the running product grows.","When the loop ends, <code>$fact</code> holds the factorial. For 0 the loop never runs, so 0! = 1."],
+note:"Large numbers overflow integers in PHP and turn into floats (e.g. 21!). Negative numbers also give 1, so real code should validate input.",
+code:`<html>
+<head><title>Input a value to factorial program</title></head>
+<body>
+<form action="" method="GET">
+Enter a number: <input type="text" name="number"><br><br>
+<input type="submit" name="send" value="submit">
+</form>
+
+<?php
+  $num   = $_GET["number"];   // get user input
+  $fact   = 1;
+  for ($i = 1; $i <= $num; $i++) {
+      $fact = $fact * $i;
+}
+  echo "The factorial of $num is $fact";
+?>
+</body>
+</html>`,
+run(v){const n=parseInt(v);if(!(n>=0&&n<=15))return fail("Enter a whole number from 0 to 15.");
+let f=1,s=[{say:`Start: $num = ${n}, $fact = 1.`+(n==0?" The loop condition 1 <= 0 is false, so it never runs.":""),row:null}];
+for(let i=1;i<=n;i++){const o=f;f*=i;s.push({say:`$i = ${i}: $fact = ${o} × ${i} = ${f}.`,row:{"$i":i,"old $fact":o,"new $fact":f}})}
+s.push({say:`Loop ended. Result is ${f}.`,row:null});
+return{steps:s,out:`The factorial of ${n} is ${f}`}},
+pool:["3","4","5","6","7","0"],
+quiz:v=>({q:`What is the factorial of ${v}? (number)`,a:String([...Array(+v).keys()].reduce((a,i)=>a*(i+1),1))})},
+
+{id:"vowel",name:"3. Count vowels",inp:"Enter a sentence (max 30 chars)",def:"Welcome to PHP",
+logic:["Keep a counter <code>$count = 0</code>.","Loop <code>$i</code> from 0 to <code>strlen($sentence) - 1</code>. A string can be read like an array: <code>$sentence[$i]</code> is one character.","Convert the character with <code>strtolower()</code> so 'A' and 'a' both match.","If it equals a, e, i, o or u, do <code>$count++</code>. Print the count at the end."],
+note:"Your code uses a fixed sentence. Here you can type your own, as if it came from <code>$_GET['string']</code>. Spaces and consonants are simply skipped.",
+code:`<?php
+
+$sentence = "Welcome to PHP programming";
+
+$count = 0;
+
+for ($i = 0; $i < strlen($sentence); $i++) {
+
+    $ch = strtolower($sentence[$i]);
+
+    if ($ch == 'a' || $ch == 'e' || $ch == 'i' ||
+        $ch == 'o' || $ch == 'u') {
+
+        $count++;
+    }
+}
+
+echo "Sentence: " . $sentence . "<br>";
+echo "Number of vowels: " . $count;
+
+?>`,
+run(v){if(!v||v.length>30)return fail("Enter 1 to 30 characters.");
+let c=0,s=[{say:`Start: $sentence = "${v}" (length ${v.length}), $count = 0.`,row:null}];
+for(let i=0;i<v.length;i++){const ch=v[i].toLowerCase(),isV="aeiou".includes(ch);if(isV)c++;
+s.push({say:`$i = ${i}: character '${v[i]}' → lowercase '${ch}'. `+(isV?`It is a vowel, so $count becomes ${c}.`:"Not a vowel, skip."),row:{"$i":i,"$ch":ch==" "?"␣":ch,"vowel?":isV?"yes":"no","$count":c}})}
+s.push({say:`Loop ended. Total vowels = ${c}.`,row:null});
+return{steps:s,out:`Sentence: ${v}\nNumber of vowels: ${c}`}},
+pool:["education","rhythm","PHP rocks","Queue","Beautiful"],
+quiz:v=>({q:`How many vowels are in "${v}"? (number)`,a:String([...v.toLowerCase()].filter(c=>"aeiou".includes(c)).length)})},
+
+{id:"pal",name:"4. Palindrome",inp:"Enter a word or text (max 20 chars)",def:"madam",
+logic:["A palindrome reads the same forwards and backwards.","Start with an empty <code>$reverse = \"\"</code>. Loop <code>$i</code> <b>backwards</b> from <code>strlen($string) - 1</code> down to 0.","Each pass, append that character: <code>$reverse = $reverse . $string[$i]</code>.","Compare <code>$string == $reverse</code>. PHP's built-in <code>strrev()</code> does the same reversal in one call."],
+note:"The comparison is case-sensitive, so 'Madam' is NOT a palindrome here ('madaM' ≠ 'Madam'). Try it! Use <code>strtolower()</code> first to fix that.",
+code:`<html>
+<body>
+<form action="" method="GET">
+Enter a string: <input type="text" name="string">
+<input type="submit">
+</form>
+</body>
+</html>
+
+<?php
+
+  $string = $_GET["string"];
+  $reverse = "";
+
+  for ($i = strlen($string) - 1; $i >= 0; $i--) {
+
+    $reverse = $reverse . $string[$i];
+
+  }
+
+  echo "Original String: " . $string . "<br>";
+  echo "Reverse String: " . $reverse. "<br>";
+  echo "Reverse String using function: " . strrev($string);
+
+  if($string==$reverse){
+   echo "String is a palindrome";
+  }
+  else{
+   echo "Given string is not a palindrome";
+  }
+?>`,
+run(v){if(!v||v.length>20)return fail("Enter 1 to 20 characters.");
+let r="",s=[{say:`Start: $string = "${v}", $reverse = "".`,row:null}];
+for(let i=v.length-1;i>=0;i--){r+=v[i];s.push({say:`$i = ${i}: take '${v[i]}' and append it. $reverse = "${r}".`,row:{"$i":i,"$string[$i]":v[i]==" "?"␣":v[i],"$reverse":r}})}
+const p=v==r;s.push({say:`Compare "${v}" == "${r}" → ${p}. `+(p?"Same, so palindrome.":"Different, so not a palindrome."),row:null});
+return{steps:s,out:`Original String: ${v}\nReverse String: ${r}\nReverse String using function: ${r}${p?"String is a palindrome":"Given string is not a palindrome"}`}},
+pool:["madam","Level","hello","racecar","Madam","noon"],
+quiz:v=>({q:`Does this code say "${v}" is a palindrome? (yes / no)`,a:v==[...v].reverse().join("")?"yes":"no"})},
+
+{id:"fib",name:"5. Fibonacci (first 10)",inp:"",def:"",noInput:true,
+logic:["Each Fibonacci number is the sum of the two before it: 0, 1, 1, 2, 3, 5 …","Start with <code>$a = 0</code> (current) and <code>$b = 1</code> (next).","Repeat 10 times: print <code>$a</code>, compute <code>$c = $a + $b</code>, then <b>shift</b> forward: <code>$a = $b</code>, <code>$b = $c</code>.","The shift is the key idea: the pair (a, b) slides one step along the series every iteration."],
+note:"The order of the three assignments matters. If you wrote <code>$a = $b</code> before computing <code>$c</code>, you'd lose the old value of $a.",
+code:`<html><head><title>Fibonacci series</title></head>
+<body>
+<?php
+  $n = 10;
+
+  $a = 0;
+  $b = 1;
+
+  echo "Fibonacci Series: ";
+
+  for ($i = 1; $i <= $n; $i++) {
+    echo $a . " ";
+
+    $c = $a + $b;
+    $a = $b;
+    $b = $c;
+  }?>
+</body>
+</html>`,
+run(){let a=0,b=1,o=[],s=[{say:"Start: $n = 10, $a = 0, $b = 1.",row:null}];
+for(let i=1;i<=10;i++){o.push(a);const c=a+b,pa=a,ob=b;a=b;b=c;s.push({say:`$i = ${i}: print ${pa}. Then $c = ${pa} + ${ob} = ${c}; shift: $a = ${a}, $b = ${b}.`,row:{"$i":i,"printed":pa,"$c":c,"new $a":a,"new $b":b}})}
+s.push({say:"Loop ended after 10 prints.",row:null});
+return{steps:s,out:"Fibonacci Series: "+o.join(" ")+" "}},
+pool:["-"],quiz:()=>({q:"What is the LAST number printed? (number)",a:"34"})}
+];
+
+let cur=0,step=0,res=null,timer=null,qa=null;
+const $=id=>document.getElementById(id);
+const nav=$("nav");
+P.forEach((p,i)=>{const b=document.createElement("button");b.textContent=p.name;b.onclick=()=>{cur=i;draw()};nav.appendChild(b)});
+
+function draw(){
+  clearInterval(timer);timer=null;const p=P[cur];res=null;step=0;qa=null;
+  [...nav.children].forEach((b,i)=>b.classList.toggle("on",i==cur));
+  $("app").innerHTML=`
+  <div class="card"><h2><span class="num">1</span>The logic</h2><ol class="logic">${p.logic.map(l=>`<li>${l}</li>`).join("")}</ol></div>
+  <div class="card"><h2><span class="num">2</span>The code</h2><pre>${esc(p.code)}</pre><div class="note">💡 ${p.note}</div></div>
+  <div class="card"><h2><span class="num">3</span>Step through the iterations</h2>
+    <div class="row">${p.noInput?"":`<input type="text" id="inp" value="${esc(p.def)}" placeholder="${p.inp}"> `}<button class="pri" id="go">${p.noInput?"Start trace":"Submit &amp; trace"}</button></div>
+    <div id="trace"></div></div>
+  <div class="card"><h2><span class="num">4</span>Your turn: predict the output</h2>
+    <div id="qbox"></div></div>`;
+  $("go").onclick=start;
+  const inp=$("inp");if(inp)inp.onkeydown=e=>{if(e.key=="Enter")start()};
+  newQ();
+}
+function start(){
+  clearInterval(timer);timer=null;const p=P[cur],inp=$("inp");
+  res=p.run(inp?inp.value.trim():"");step=0;
+  if(res.err){$("trace").innerHTML=`<p class="bad">${res.err}</p>`;res=null;return}
+  $("trace").innerHTML=`<div class="row"><button id="pv">◀ Prev</button><button id="nx" class="pri">Next ▶</button><button id="pl">▶ Auto-play</button><button id="rs">Reset</button></div>
+  <div class="say" id="say"></div><div class="tw"><table id="tb"></table></div><div class="out" id="out"></div>`;
+  $("pv").onclick=()=>go(-1);$("nx").onclick=()=>go(1);$("rs").onclick=()=>{stop();step=0;show()};
+  $("pl").onclick=()=>{if(timer){stop();return}if(step>=res.steps.length-1)step=0;$("pl").textContent="⏸ Pause";timer=setInterval(()=>{if(step>=res.steps.length-1){stop();return}go(1)},900)};
+  show();
+}
+function stop(){clearInterval(timer);timer=null;const b=$("pl");if(b)b.textContent="▶ Auto-play"}
+function go(d){step=Math.max(0,Math.min(res.steps.length-1,step+d));show()}
+function show(){
+  const S=res.steps,rows=S.slice(0,step+1).filter(s=>s.row);
+  $("say").textContent=`Step ${step+1} of ${S.length}: `+S[step].say;
+  let h="";if(rows.length){const k=Object.keys(rows[0].row);h=`<tr>${k.map(c=>`<th>${esc(c)}</th>`).join("")}</tr>`+rows.map((s,i)=>`<tr class="${S[step]===s?"cur":""}">${k.map(c=>`<td>${esc(s.row[c])}</td>`).join("")}</tr>`).join("")}
+  $("tb").innerHTML=h;
+  const last=step==S.length-1;
+  $("out").innerHTML=last?"Output:<br>"+esc(res.out).replace(/\n/g,"<br>"):"Output appears when the loop finishes…";
+  $("pv").disabled=step==0;$("nx").disabled=last;
+}
+function newQ(){
+  const p=P[cur],v=p.pool[Math.floor(Math.random()*p.pool.length)];qa=p.quiz(v);
+  $("qbox").innerHTML=`<p style="margin-top:0">${esc(qa.q)}</p><div class="row"><input type="text" id="ans"><button class="pri" id="ck">Check</button><button id="nq">New question</button></div><div id="fb"></div>`;
+  $("ck").onclick=()=>{const a=$("ans").value.trim().toLowerCase(),ok=a==qa.a||(qa.a=="yes"&&a=="y")||(qa.a=="no"&&a=="n");
+    $("fb").innerHTML=ok?`<p class="ok">✅ Correct! The answer is ${qa.a}.</p>`:`<p class="bad">❌ Not quite. Run this input through the trace above, then try again.</p>`};
+  $("ans").onkeydown=e=>{if(e.key=="Enter")$("ck").click()};
+  $("nq").onclick=newQ;
+}
+draw();
+</script>
+<footer style="font-family: 'Courier New', Courier, monospace; font-size: small;">
+  <center>
+  Powered by Mithili Kakodkar
+  </center>
+</footer>
+</body></html>
